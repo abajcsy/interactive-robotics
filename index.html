@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Interactive Robotics</title>
+  
+  <meta name="author" content="Andrea Bajcsy">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Style-related -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="icon" href="favicon-dragon.ico">
+  <!--/ Style-related -->
+
+  <!-- MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+  </script>
+  <script>
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <!--/ MathJax -->
+</head>
+
+
+<!-- HEADER -->
+<div class="header" style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;padding-bottom:0px">
+  <!-- Class name -->
+  <a href="index.html" class="logo" style="color:black;font-size:30px; padding-top:30px; padding-left:20px">XX-YYY Interactive Robotics</a>
+</div>
+<!--/ HEADER -->
+
+
+<body>
+
+<!-- CONTENT -->
+<table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+  <tbody>
+  <tr style="padding:0px">
+    <td style="padding:0px">
+
+
+  <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
+    <tr>
+      <td>
+        <p>
+          <b>Instructor:</b> <a href="https://www.cs.cmu.edu/~abajcsy/">Andrea Bajcsy</a>
+        </p>
+        <p>
+          <i><b>Note:</b> These are working notes for a graduate-level course. They will be updated throughout the semester. </i>
+        </p>
+
+        <h1 style="font-variant-caps: small-caps;">Overview</h1>
+        <p>
+         Robot interaction with humans is inevitable: autonomous cars navigate through crowded cities, assistive robots help end-users with daily living tasks, and human engineers iteratively tune robot objective functions.  In this graduate seminar class, we will build the mathematical foundations for <i><b>modeling</b></i> human-robot interaction, investigate algorithms for robot <i><b>learning</b></i> from human data, and develop the tools to analyze the <i><b>safety</b></i> and reliability of robots deployed around people. The approaches covered will draw upon a variety of tools such as optimal control, dynamic game theory, Bayesian inference, and modern machine learning. 
+        </p>
+
+        <!------------------------------------------->
+        <h2 style="font-variant-caps: small-caps;">Table of Contents</h2>
+        <ol>
+          <li>
+            <a href="intro.html">
+              <span>Interaction 101</span> <!-- robust, planning, physics, pattern-based models -->
+            </a>&#10004;
+          </li>
+
+          <li>
+            <a href="#link_to_heading">
+              <span>Mathematical Models of Humans</span>
+            </a>
+
+            <!-- subsection items --> 
+            <ul>
+              <li><span>Model Suite: Robust, Planning, Physics, & Pattern-based</span></li>
+              <li><span>Human-in-isolation</span></li>
+                  <ul>
+                    <li><span>Human as a Planner</span></li>
+                    <li><span>Noisily-Rational Models</span></li>
+                    <li><span>Goal Inference</span></li>
+                    <li><span>Data-driven Noisily-Rational</span></li>
+                  </ul>
+              <li><span>Interaction-aware</span></li>
+                  <ul>
+                    <li><span>Theory of Mind</span></li>
+                    <li><span>Interaction as a General-Sum Game</span></li>
+                    <li><span>Data-driven Conditional Behavior Prediction</span></li>
+                  </ul>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#link_to_heading">
+              <span><i><b>Frontiers</b></i>: Trustworthy Human Models</span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="learning_from_humans.html">
+              <span>Robot Learning from Humans</span>
+            </a>
+
+            <!-- subsection items --> 
+            <ul>
+              <li><span>Reward learning: What do you <i>want</i>?</span></li>
+                  <ul>
+                    <li><span>Maximum Entropy IRL</span> &#10004; </li>
+                    <li><span>Inverse Games</span></li>
+                  </ul>
+              <li><span>Policy learning: How do you <i>behave</i>?</span></li>
+                  <ul>
+                    <li><span>Behavior Cloning</span></li>
+                    <li><span>DAgger & Variants</span></li>
+                  </ul>
+              <li><span>(More) Types of Human Feedback</span></li>
+                  <ul>
+                    <li><span>Physical Corrections</span></li>
+                    <li><span>Preferences, Rankings</span></li>
+                    <li><span>...and More (RRIC, Language, Gestures, etc.)</span></li>
+                  </ul>
+            </ul>
+          </li>
+
+
+          <li>
+            <a href="#link_to_heading">
+              <span><i><b>Frontiers</b></i>: Aligned Robot Learning from Humans</span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="#link_to_heading">
+              <span>Mathematical Models of Safety</span>
+            </a>
+
+            <!-- subsection items --> 
+            <ul>
+              <li><span><i>Refresh</i>: Dynamic Programming</span></li>
+              <li><span>Single-Agent Safety: Intro to HJ Reachability </span></li>
+              <li><span>Multi-Agent Safety: Zero-Sum Games & HJI Reachability</span></li>
+              <li><span>Safety Filtering</span></li>
+              <li><span>Computational Tools</span></li>
+            </ul>
+
+          </li>
+
+          <li>
+            <a href="#link_to_heading">
+              <span><i><b>Frontiers</b></i>: Scalable, Human-Centric Safety</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#link_to_heading">
+              <span><i><b>Frontiers</b></i>: Safety Beyond Collision Avoidance </span>
+            </a>
+          </li>
+
+        </ol>
+
+        <!------------------------------------------->
+      </td>
+    </tr>
+  </tbody>
+  </table>
+  <!--/ CONTENT -->
+
+  <!-- Footer -->
+  <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0" style="padding-top:0px;">
+    <tbody>
+      <tr>
+      <td>
+      <br>
+      <p></p>
+      <br><br>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+  <!--/ Footer -->
+
+</body>
+
+</html>

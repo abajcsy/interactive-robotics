@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Interactive Robotics</title>
+  
+  <meta name="author" content="Andrea Bajcsy">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Style-related -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="icon" href="favicon-dragon.ico">
+  <!--/ Style-related -->
+
+  <!-- MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+  </script>
+  <script>
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <!--/ MathJax -->
+</head>
+
+
+<!-- HEADER -->
+<div class="header" style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;padding-bottom:0px">
+  <!-- Class name -->
+  <a href="index.html" class="logo" style="color:black;font-size:30px; padding-top:30px; padding-left:20px">XX-YYY Interactive Robotics</a>
+  
+</div>
+<!--/ HEADER -->
+
+
+<body>
+
+<!-- CONTENT -->
+<table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+  <tbody>
+  <tr style="padding:0px">
+    <td style="padding:0px">
+
+  <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
+    <tr>
+      <td>
+        <hr>
+        <div style="text-align:center; font-variant-caps: small-caps;">
+          <a href="index.html" style="font-size:18px; color:black">Table of Contents</a>
+        </div>
+        <hr>
+
+        <h1 style="font-variant-caps: small-caps;">Robot Learning from Humans</h1>
+        <!------------------------------------------->
+        
+        <h2 style="font-variant-caps: small-caps;">Reward Learning</h2>
+
+        <!------------- Max Ent IRL ----------------->
+        <h3>Maximum Entropy IRL</h3>
+        <p>
+          <b>Problem:</b> Imagine that your friend demonstrates a behavior to you, like walking around an office room. Just by observing their trajectory, can you infer how they chose that particular motion?
+        </p>
+
+        <p>
+          This is the typical Inverse Reinforcement Learning (IRL) problem, which seeks to explain an observed demonstration by uncovering the demonstrator's unknown objective function. Unfortunately, however, this is an ill-posed problem; many different objective functions can produce the same behavior and many different behaviors can be explained by the same objective function. Furthermore, demonstrations are often noisy. 
+        </p>
+        <p>
+          Maximum Entropy IRL [1] addresses these issues by treating the demonstrations as observations drawn from some distribution that models the demonstrator as being <i>approximately optimal</i>. There are many candidate distributions, however, so the question remains: how do we choose the ``best'' one? 
+        </p>
+        <p>
+          As we will show in this document, the principle of maximum entropy allows us to find a distribution across trajectories that ensures we are not favoring any trajectories <i>other than the ones that are similar to the demonstrated one</i>. This also helps to resolve the ambiguity over objective functions inherent to the IRL formulation.
+        </p>
+        <p>
+          <b>Formalism:</b> First, let's formalize how we measure relevant properties of the demonstrator's behavior. 
+        </p>
+        <p>
+          Let a trajectory \(\xi \in \Xi\) with horizon \(T\) be a sequence of states and actions: \(\xi = \{(x_1,u_1), (x_2,u_2), ..., (x_T,u_T)\}\). Define a function, $f: \Xi \rightarrow \mathbb{R}^n$, that maps trajectories to a vector of real values. These real values, called \textit{features}, can represent quantities that the agent might care about when producing its behavior; for example the agent's distance to obstacles, the speed of their movement, distance to other agents, etc. 
+
+          \medskip
+          \textbf{Goal:} Following prior work in IRL [3], we want to find distribution over observations (trajectories in this case), $P(\xi)$, that matches the empirical feature values in expectation
+          
+          \begin{equation}
+          \mathbb{E}_{\xi \sim P(\xi)} [f(\xi)] = f_D
+          \end{equation}
+          
+          where $\xi \in \Xi$ is a trajectory and $f_D$ are the feature values of the demonstration. These can be empirically computed from a set of demonstrated trajectories $D = \{\xi_1,\xi_2,\hdots,\xi_m\}$
+          
+          \begin{equation}
+          f_D = \frac{1}{|D|} \sum_{\xi \in D} f(\xi)
+          \end{equation}
+
+          \textbf{Aside.} \textit{Why do we want the feature expectations to match those of the demonstrated trajectories?} Abbeel and Ng [3] shed light on why this is a good constraint to have.
+        </p>
+
+        <p>
+          Let $r(x_t,u_t) = \lambda^{\top} f(x_t,u_t)$ be the reward of being in state $x_t$  and executing $u_t$ at time $t$ and $\lambda$ be a weight on the features of the state and action. Now, the expected return of executing a trajectory $\xi = \{(x_1,u_1), (x_2,u_2), \hdots (x_T,u_T)\}$ sampled from our distribution $P(\xi)$ is:
+
+          \begin{align*}
+              \mathbb{E}_{\xi \sim P(\xi)} \left[\sum^T_{t=0} r(x_t,u_t) \right] &= 
+                              \mathbb{E}_{\xi \sim P(\xi)} \left[\sum^T_{t=0}  \lambda^{\top} f(x_t,u_t) \right] \\
+                              &= \lambda^{\top} \mathbb{E}_{\xi \sim P(\xi)} \left[\sum^T_{t=0} f(x_t,u_t) \right] \\
+                              &= \lambda^{\top} \mathbb{E}_{\xi \sim P(\xi)} \left[f(\xi) \right]
+          \end{align*}
+          where $f(\xi)$ is the sum of features of the state-action pairs encountered along the trajectory. We now see that the expected return of executing a trajectory can be written as a weighted feature expectation, $\lambda^{\top} \mathbb{E}_{\xi \sim P(\xi)}[f(\xi)]$. This means that if we have distributions that induce matching feature expectations, then they also produce trajectories that have matching returns in expectation! 
+        </p>
+
+        <p>
+          \textbf{Insight:} We want to make as few possible assumptions about the demonstrated trajectory while still matching the feature expectations. Recall that high entropy means high uncertainty. Thus, by finding the distribution that \textit{maximizes} entropy over trajectories (subject to matching demonstrated feature values in expectation), we avoid favoring any particular trajectory other than ones that satisfy the feature constraints.
+        </p>
+
+        <p>
+          \textbf{Derivation:} Let's formulate this insight as an optimization problem. As we said before, we want to find the distribution that maximizes the entropy subject to the feature expectations constraint, and the constraint that the distribution is a valid probability distribution
+
+
+          \begin{equation}
+            \begin{aligned}
+            \max_{P} \quad & \int -P(\xi)\log P(\xi) d\xi\\
+            \textrm{s.t.} \quad & \mathbb{E}_{\xi \sim P(\xi)}[f(\xi)] = \int P(\xi)f(\xi) d\xi = f_D\\
+              &\int P(\xi)d\xi = 1    \\
+              &P(\xi) \geq 0, \forall \xi \in \Xi
+            \end{aligned}
+            \label{eq:opt_prob}
+          \end{equation}
+
+          For simplicity, we will first ignore the inequality constraint in Equation \ref{eq:opt_prob}. We will later show that the solution trivially satisfies this constraint. Therefore, we form the Lagrangian, using multipliers $\lambda$ and $\nu$ as 
+
+          \begin{align*}
+              \mathcal{L}(P,\lambda,\nu) & = \int -P(\xi)\log P(\xi) d\xi + \lambda^{\top} \left( \int P(\xi)f(\xi) d\xi - f_D\right) + \nu \left(\int P(\xi)d\xi - 1\right) \\
+              & = \int -\left( P(\xi)\log P(\xi) + \lambda^{\top} P(\xi)f(\xi) + \nu P(\xi) \right) d \xi -\lambda^{\top} f_D - \nu.
+          \end{align*}
+
+          Notice how the Lagrangian is a functional (i.e. function of a function). Therefore to solve for the maximum of this functional, we will employ calculus of variations. Specifically, by applying the Euler-Lagrange equation
+
+          \begin{equation}
+              \frac{\partial\,F}{\partial\,P}(\xi, P(\xi), P'(\xi)) - \frac{d}{d\,\xi} \frac{\partial\,F}{\partial\,P'}(\xi, P(\xi), P'(\xi)) = 0,
+              \label{eq:euler_lagrange}
+          \end{equation}
+
+          we can find the function $P^\star: \Xi \rightarrow [0,1]$ that optimizes our functional $F$, which in general may be a function of the vector $\xi$, the function $P$, and the derivative of that function $P'$ with respect to $\xi$.
+
+          Looking back at our Lagrangian, let's define:
+          \begin{equation}
+          F(\xi, P(\xi), P'(\xi)) = -P(\xi)\log P(\xi) + \lambda^{\top} P(\xi)f(\xi) + \nu P(\xi)
+          \end{equation}
+
+          Now, we see that our Lagrangian is a function of $\xi$ and distribution $P(\xi)$ and does not depend on the first derivative $P'(\xi)$
+          \begin{equation}
+          \mathcal{L}(P, \lambda, \nu) = \int F(\xi, P(\xi), P'(\xi))  d\xi - \lambda^{\top} f_D - \nu
+          \end{equation}
+
+          Since the $\lambda^{\top} f_D$ and $\nu$ are constants, then their subtraction simply shifts the function, but the optimum of the Lagrangian will remain unchanged. So without loss of generality we can let $\lambda^{\top} f_D = 0, \nu = 0$. 
+
+          The full optimization problem we would now like to solve is
+          \begin{equation}
+          (P^{\star},\lambda^{\star}, \nu^{\star}) = \text{arg}\min_{\lambda, \nu}\text{arg}\max_P \mathcal{L}(P,\lambda,\nu)
+          \end{equation}
+        </p>
+
+        <p>
+          <b>Solving for \(P^{\star}\)</b>
+        </p>
+
+        <p>
+          Using Equation \ref{eq:euler_lagrange}, we can take the partial derivative with respect to $P$, set it equal to zero, and solve for $P^\star$.
+          \begin{equation}
+          \frac{\partial F}{\partial P}(\xi,P(\xi),P'(\xi)) = 0
+          \end{equation}
+
+          First we take the partial derivative $\frac{\partial F}{\partial P}(\xi,P(\xi),P'(\xi))$ and then rearrange terms
+          \begin{equation}
+           -\log P(\xi) - 1 + \lambda^{\top} f(\xi) + \nu = 0 \implies \log P(\xi) = \lambda^{\top} f(\xi) + \nu - 1
+          \end{equation}
+
+          Finally, we solve for $P^\star$:
+          \begin{equation}
+          \boxed{P^\star(\xi)~=~ e^{\lambda^{\top} f(\xi)+\nu-1}}
+          \end{equation}
+
+          Now we can substitute our solution back into the Lagrangian to get
+          \begin{align*}
+              \mathcal{L}(P^*,\lambda,\nu) &= \int -\left(e^{\lambda^{\top} f(\xi)+\nu-1}\right) \log \left(e^{\lambda^{\top} f(\xi)+\nu-1} \right) + \lambda^{\top} \left(e^{\lambda^{\top} f(\xi)+\nu-1} \right)f(\xi) + \nu \left(e^{\lambda^{\top} f(\xi)+\nu-1}\right) d\xi - \lambda^{\top} f_D - \nu  \\
+              &= \int - \lambda^{\top} f(\xi) \left(e^{\lambda^{\top} f(\xi)+\nu-1} \right) + e^{\lambda^{\top} f(\xi)+\nu -1} - \nu e^{\lambda^{\top} f(\xi)+\nu-1} &\\&\hspace{7mm} + \lambda^{\top} f(\xi) e^{\lambda^{\top} f(\xi)+\nu-1} + \nu e^{\lambda^{\top} f(\xi)+\nu-1} d\xi - \lambda^{\top} f_D - \nu  \\
+              &= \int e^{\lambda^{\top} f(\xi)+\nu-1} d\xi - \lambda^{\top} f_D - \nu  
+          \end{align*}
+        </p>
+
+        <p><b>Solving for $\nu^\star$</b></p>
+        <p>
+          After finding $P^\star$, the dual function is $g(\lambda, \nu) = \mathcal{L}(P^\star, \lambda, \nu)$ with dual problem $\min_{\lambda, \nu} g(\lambda, \nu)$. To find $\nu^\star$ we follow a similar procedure
+          \begin{equation}
+          \frac{\partial \mathcal{L}}{\partial \nu} = 0 \implies e^{\nu-1} \int e^{\lambda^{\top} f(\xi)} d\xi - 1= 0 \implies e^{-\nu} = \int e^{\lambda^{\top} f(\xi) -1} d\xi
+          \end{equation}
+
+          Solving for $\nu$, we get
+          \begin{equation}
+          \boxed{\nu^\star = -\log\left( \int e^{\lambda^{\top} f(\xi) -1}\right)}
+          \end{equation}
+
+          Since we are interested in the probability distribution that maximizes this optimization problem, we can plug $\nu^\star$ into $P^\star(\xi)$
+          \begin{align*}
+              P^\star(\xi) &= e^{\lambda^{\top} f(\xi) - \log(\int e^{\lambda^{\top} f(\xi)-1} d\xi) -1} \\
+                      &= \frac{e^{\lambda^{\top} f(\xi)-1}}{\int e^{\lambda^{\top} f(\tilde{\xi})-1} d\tilde{\xi}}
+          \end{align*}
+
+          We can now view our resulting probability distribution as parameterized by $\lambda$, where 
+          \begin{equation}
+           \boxed{P^\star(\xi; \lambda) = \frac{e^{\lambda^{\top} f(\xi)}}{\int e^{\lambda^{\top} f(\tilde{\xi})} d\tilde{\xi}}}
+          \end{equation}
+          Note that this solution satisfies the inequality constraint we had in Equation  \ref{eq:opt_prob}.
+        </p>
+
+        <p><b>Solving for $\lambda^\star$</b></p>
+        <p>
+          Above, we kept $\lambda$ as a parameter under our distribution. The role of $\lambda$ is to \textit{weight} the various feature values of $\xi$. Given an observation of the demonstrator's trajectory, $\xi_D$, we want to choose $\lambda$ so that it maximizes the likelihood of the observed trajectory in our distribution. To find an estimate of the $\lambda$ that maximizes this likelihood, we can solve
+          \begin{equation*}
+              \lambda^\star = \arg\max_{\lambda} \log P(\xi_D; \lambda) = \arg\max_{\lambda} \lambda^{\top}f(\xi_D) - \log \left( \int e^{\lambda^{\top}f(\xi)} d\xi\right)
+          \end{equation*}
+          Let $M = \lambda^{\top}f(\xi_D) - \log \left( \int e^{\lambda^{\top}f(\tilde{\xi})} d\tilde{\xi}\right)$. To find optimal $\lambda$, take the gradient of the objective w.r.t. $\lambda$
+          \begin{align*}
+              \nabla_{\lambda} M &= f(\xi_D) - \frac{1}{\int e^{\lambda^{\top}f(\tilde{\xi})}d\tilde{\xi}} \int f(\xi)e^{\lambda^{\top}f(\xi)} d\xi\\
+               &= f(\xi_D) - \int f(\xi)\frac{e^{\lambda^{\top}f(\xi)} d\xi}{\int e^{\lambda^{\top}f(\tilde{\xi})}d\tilde{\xi}} \\
+               &= f(\xi_D) - \int f(\xi) P(\xi; \lambda) d\xi \\
+               &= f(\xi_D) - \mathbb{E}_{\xi \sim P(\xi;\lambda)}[f(\xi)]
+          \end{align*}
+          This now gives us an intuitive gradient update rule, where we want to minimize the difference between the demonstrated feature values and the expected feature values under the estimated distribution. We can solve for $\lambda$ by gradient descent, with the update rule
+          \begin{equation}
+          \boxed{\lambda_{i+1} = \lambda_i + \alpha \left(f(\xi_D) - \mathbb{E}_{\xi \sim P(\xi;\lambda)}[f(\xi)] \right)} 
+          \end{equation}
+        </p>
+        <!-------------/ Max Ent IRL ----------------->
+
+        <!------------------------------------------->
+      </td>
+    </tr>
+  </tbody>
+  </table>
+  <!--/ CONTENT -->
+
+  <!-- Footer -->
+  <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0" style="padding-top:0px;">
+    <tbody>
+      <tr>
+      <td>
+      <br>
+      <p></p>
+      <br><br>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+  <!--/ Footer -->
+
+</body>
+
+</html>

@@ -1,0 +1,403 @@
+/*@import url('fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');*/
+
+a {
+  color: #0099cc; /*#0099cc; */ /*#14A098;*/ /*#0099cc;*/
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: #f18800; /* #f18800; */
+  text-decoration: none;
+}
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  /*font-family: 'Libre Baskerville', serif;*/
+  /*font-family: 'Poppins', sans-serif; */
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /*font-family: 'Lora', serif;*/
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+strong {
+  /*font-family: 'Libre Baskerville', serif;*/
+  /*font-family: 'Poppins', sans-serif;*/
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /*font-family: 'Lora', serif;*/
+  font-size: 15px;
+}
+
+heading {
+  /*font-family: 'Libre Baskerville', serif;*/
+  /*font-family: 'Poppins', sans-serif; */
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /*font-family: 'Lora', serif;*/
+  font-size: 24px;
+}
+
+papertitle {
+  /*font-family: 'Libre Baskerville', serif;*/
+  /*font-family: 'Poppins', sans-serif; */
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /*font-family: 'Lora', serif;*/
+  font-size: 15px;
+  font-weight: 700
+}
+
+profile-name {
+  /*font-family: 'Libre Baskerville', serif;*/
+  /*font-family: 'Poppins', sans-serif; */
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /*font-family: 'Lora', serif;*/
+  font-size: 19px;
+  font-weight: 700
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 0px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+name {
+  /*font-family: 'Libre Baskerville', serif;*/
+  /*font-family: 'Poppins', sans-serif; */
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /*font-family: 'Lora', serif;*/
+  font-size: 34px;
+}
+
+.one {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.two {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+.fade {
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+span.highlight {
+  background-color: #ffffd0;
+}
+
+.header {
+  overflow: hidden;
+  background-color: white;
+  padding: 10px 10px;
+}
+
+/* Style the header links */
+.header a {
+  float: left;
+  /*color: #0099cc;*/
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 16px;
+  /*line-height: 25px;*/
+  border-radius: 4px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+  background-color: white;
+  color: #f18800;
+}
+
+/* Style the active/current link*/
+/*.header a.active {
+  background-color: white;
+  color: #0099cc;
+}*/
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* Float the link section to the left */
+.header-left {
+  float: left;
+}
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    border: none;
+    background-color: #0099cc;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    /*font-family:'Poppins',sans-serif;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    /*font-family: 'Lora', serif;*/
+    /*border-padding:10px;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius: 8%/16%;
+    margin:0.3e, 0.3em 0.3em 0.3em;
+}
+
+
+a.button-paper {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    border: none;
+    background-color: #0099cc;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    /*font-family:'Poppins',sans-serif;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    /*font-family: 'Lora', serif;*/
+    /*border-padding:10px;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius: 8%/16%;
+    margin:0.3e, 0.3em 0.3em 0.3em;
+}
+
+a.button-video {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    border: none;
+    background-color: grey;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    /*font-family:'Poppins',sans-serif;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    /*font-family: 'Lora', serif;*/
+    /*border-padding:10px;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius: 8%/16%;
+    margin:0.3e, 0.3em 0.3em 0.3em;
+}
+
+a.button-code {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    border: none;
+    background-color: #383838;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    /*font-family:'Poppins',sans-serif;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    /*font-family: 'Lora', serif;*/
+    /*border-padding:10px;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius: 8%/16%;
+    margin:0.3e, 0.3em 0.3em 0.3em;
+}
+
+a.button-website {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    border: none;
+    background-color: #8064A2;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    /*font-family:'Poppins',sans-serif;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    /*font-family: 'Lora', serif;*/
+    /*border-padding:10px;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius: 8%/16%;
+    margin:0.3e, 0.3em 0.3em 0.3em;
+}
+
+a.button-blog {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    border: none;
+    background-color: #ed8e00;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    /*font-family:'Poppins',sans-serif;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    /*font-family: 'Lora', serif;*/
+    /*border-padding:10px;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius: 8%/16%;
+    margin:0.3e, 0.3em 0.3em 0.3em;
+}
+
+a.button-talk {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    border: none;
+    background-color: #9BBB59;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    /*font-family:'Poppins',sans-serif;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    /*font-family: 'Lora', serif;*/
+    /*border-padding:10px;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius: 8%/16%;
+    margin:0.3e, 0.3em 0.3em 0.3em;
+}
+
+
+a.button-profile {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    border: none;
+    background-color: black; /* #ed8e00; */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top:1px;
+    padding-bottom:1px;
+    border-radius: 18%/18%;
+    margin:0.3e, 0.3em 0.3em 0.3em;
+}
+
+blockquote.example {
+  background-color: #fff2e0; 
+  padding:15px;
+  border-radius:10px;
+}
+
+button.button1{
+  background-color:#FFFFFF;
+  border:none;
+  color: #0099cc;
+  text-decoration:none;
+  /*font-family:'Poppins',sans-serif;*/
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /*font-family: 'Lora', serif;*/
+  /*padding-left:2px;*/
+  /*padding-left:0.2em 0.35em;*/
+  margin:0 0.3em 0.3em 0;
+}
+button.button1:hover{
+  color:#f18800;
+  /*background-color:#0099cc;  */
+  /*padding:0.2em 0.35em;*/
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.5em;
+  cursor: pointer; 
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
