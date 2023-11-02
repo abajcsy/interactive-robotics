@@ -3,7 +3,7 @@
 
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <title>Interactive Robotics</title>
+  <title>16-886: Interactive Robotics</title>
   
   <meta name="author" content="Andrea Bajcsy">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,9 +34,9 @@
 
 
 <!-- HEADER -->
-<div class="header" style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;padding-bottom:0px">
+<div class="header" style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;padding-bottom:0px;">
   <!-- Class name -->
-  <a href="index.html" class="logo" style="color:black;font-size:30px; padding-top:30px; padding-left:20px">XX-YYY Interactive Robotics</a>
+  <a href="index.html" class="logo" style="color:black;font-size:30px; padding-top:30px; padding-left:0px; width:100%;max-width:900px;">16-886 Models & Algorithms for Interactive Robotics<p>Spring 2024</p></a>
 </div>
 <!--/ HEADER -->
 
@@ -47,128 +47,38 @@
 <table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
   <tbody>
   <tr style="padding:0px">
-    <td style="padding:0px">
-
+    <td style="padding:0px" class=main>
+    
+  <img src="./static/images/front_fig.png" class="center" width=100%>
 
   <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
     <tr>
-      <td>
+      <td class=main>
+
         <p>
-          <b>Instructor:</b> <a href="https://www.cs.cmu.edu/~abajcsy/">Andrea Bajcsy</a>
+          <b>Professor:</b> <a href="https://www.cs.cmu.edu/~abajcsy/">Andrea Bajcsy</a>  (<tt>abajcsy [at] cmu [dot] edu</tt>)
         </p>
         <p>
-          <i><b>Note:</b> These are working notes for a graduate-level course. They will be updated throughout the semester. </i>
+          <b>Time: </b> Mon & Wed, 11:00 - 12:20pm
+          <br>
+          <b>Location: </b> NSH 3002
+        </p>
+        <p>
+          <b>Syllabus: </b> <a href="16_886_syllabus.pdf">PDF</a>
         </p>
 
         <h1 style="font-variant-caps: small-caps;">Overview</h1>
         <p>
-         Robot interaction with humans is inevitable: autonomous cars navigate through crowded cities, assistive robots help end-users with daily living tasks, and human engineers iteratively tune robot objective functions.  In this graduate seminar class, we will build the mathematical foundations for <i><b>modeling</b></i> human-robot interaction, investigate algorithms for robot <i><b>learning</b></i> from human data, and develop the tools to analyze the <i><b>safety</b></i> and reliability of robots deployed around people. The approaches covered will draw upon a variety of tools such as optimal control, dynamic game theory, Bayesian inference, and modern machine learning. 
+          Robot deployment around real people is rapidly accelerating: autonomous cars navigate through crowded cities on a daily basis, assistive robots increasingly help end-users with daily living tasks, and large teams of human engineers interactively teach robots basic skills. However, robot interaction with humans requires us to re-evaluate the assumptions built into all components of our autonomy algorithms, from decision-making, to machine learning, to safety analysis.
+        </p>
+        <p>
+          In this graduate seminar class, we will build the mathematical foundations for modeling human-robot interaction, develop the tools to analyze the safety and reliability of robots deployed around people, and investigate algorithms for robot learning from human data. The approaches covered will draw upon a variety of tools such as optimal control, dynamic game theory, Bayesian inference, and modern machine learning. Throughout the class, there will also be guest lectures from experts in the field. Students will practice essential research skills including reviewing papers, writing research project proposals, and technical communication.
         </p>
 
-        <!------------------------------------------->
-        <h2 style="font-variant-caps: small-caps;">Table of Contents</h2>
-        <ol>
-          <li>
-            <a href="intro.html">
-              <span>Interaction 101</span> <!-- robust, planning, physics, pattern-based models -->
-            </a>&#10004;
-          </li>
-
-          <li>
-            <a href="#link_to_heading">
-              <span>Mathematical Models of Humans</span>
-            </a>
-
-            <!-- subsection items --> 
-            <ul>
-              <li><span>Model Suite: Robust, Planning, Physics, & Pattern-based</span></li>
-              <li><span>Human-in-isolation</span></li>
-                  <ul>
-                    <li><span>Human as a Planner</span></li>
-                    <li><span>Noisily-Rational Models</span></li>
-                    <li><span>Goal Inference</span></li>
-                    <li><span>Data-driven Noisily-Rational</span></li>
-                  </ul>
-              <li><span>Interaction-aware</span></li>
-                  <ul>
-                    <li><span>Theory of Mind</span></li>
-                    <li><span>Interaction as a General-Sum Game</span></li>
-                    <li><span>Data-driven Conditional Behavior Prediction</span></li>
-                  </ul>
-            </ul>
-          </li>
-
-          <li>
-            <a href="#link_to_heading">
-              <span><i><b>Frontiers</b></i>: Trustworthy Human Models</span>
-            </a>
-          </li>
-
-
-          <li>
-            <a href="learning_from_humans.html">
-              <span>Robot Learning from Humans</span>
-            </a>
-
-            <!-- subsection items --> 
-            <ul>
-              <li><span>Reward learning: What do you <i>want</i>?</span></li>
-                  <ul>
-                    <li><span>Maximum Entropy IRL</span> &#10004; </li>
-                    <li><span>Inverse Games</span></li>
-                  </ul>
-              <li><span>Policy learning: How do you <i>behave</i>?</span></li>
-                  <ul>
-                    <li><span>Behavior Cloning</span></li>
-                    <li><span>DAgger & Variants</span></li>
-                  </ul>
-              <li><span>(More) Types of Human Feedback</span></li>
-                  <ul>
-                    <li><span>Physical Corrections</span></li>
-                    <li><span>Preferences, Rankings</span></li>
-                    <li><span>...and More (RRIC, Language, Gestures, etc.)</span></li>
-                  </ul>
-            </ul>
-          </li>
-
-
-          <li>
-            <a href="#link_to_heading">
-              <span><i><b>Frontiers</b></i>: Aligned Robot Learning from Humans</span>
-            </a>
-          </li>
-
-
-          <li>
-            <a href="#link_to_heading">
-              <span>Mathematical Models of Safety</span>
-            </a>
-
-            <!-- subsection items --> 
-            <ul>
-              <li><span><i>Refresh</i>: Dynamic Programming</span></li>
-              <li><span>Single-Agent Safety: Intro to HJ Reachability </span></li>
-              <li><span>Multi-Agent Safety: Zero-Sum Games & HJI Reachability</span></li>
-              <li><span>Safety Filtering</span></li>
-              <li><span>Computational Tools</span></li>
-            </ul>
-
-          </li>
-
-          <li>
-            <a href="#link_to_heading">
-              <span><i><b>Frontiers</b></i>: Scalable, Human-Centric Safety</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#link_to_heading">
-              <span><i><b>Frontiers</b></i>: Safety Beyond Collision Avoidance </span>
-            </a>
-          </li>
-
-        </ol>
-
+        <h1 style="font-variant-caps: small-caps;">Prerequisites</h1>
+        <p>
+          The course is open to graduate students without strict prerequisites. Familiarity with differen- tial equations, probability, and linear algebra is highly encouraged. Interested undergraduate students with a strong background may seek approval from the instructor.
+        </p>
         <!------------------------------------------->
       </td>
     </tr>
@@ -176,11 +86,14 @@
   </table>
   <!--/ CONTENT -->
 
+  <!-- SCHEDULE -->
+  <!--/ SCHEDULE -->
+
   <!-- Footer -->
   <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0" style="padding-top:0px;">
     <tbody>
       <tr>
-      <td>
+      <td class=main>
       <br>
       <p></p>
       <br><br>

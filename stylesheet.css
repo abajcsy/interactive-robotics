@@ -64,6 +64,12 @@ profile-name {
   font-weight: 700
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
 .column {
   float: left;
   width: 50%;
@@ -76,6 +82,17 @@ profile-name {
   clear: both;
   display: table;
 }
+
+table.schedule, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+td.main {
+  border: 0px solid black;
+}
+
 
 name {
   /*font-family: 'Libre Baskerville', serif;*/
@@ -364,6 +381,12 @@ a.button-profile {
 
 blockquote.example {
   background-color: #fff2e0; 
+  padding:15px;
+  border-radius:10px;
+}
+
+blockquote.callout {
+  background-color: #d8ecf2; 
   padding:15px;
   border-radius:10px;
 }
