@@ -11,19 +11,60 @@ a:hover {
   text-decoration: none;
 }
 
-body,
+/*body,
 td,
 th,
 tr,
 p,
 a {
-  /*font-family: 'Libre Baskerville', serif;*/
-  /*font-family: 'Poppins', sans-serif; */
-  /*font-family: 'Open Sans', sans-serif;*/
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  /*font-family: 'Lora', serif;*/
   font-size: 15px;
   line-height: 1.5;
+}*/
+
+body p, body a, body table{
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+
+tr.block {
+  background-color: #F0F0F0;
+}
+
+.label {
+  display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.label-lecture {
+    background-color: #839192  ;
+}
+
+.label-guest-lecture {
+    background-color: #478778;
+}
+
+.label-reading {
+    background-color: SteelBlue;
+}
+
+.label-presentation {
+    background-color: #EB984E;
+}
+
+.label-due {
+    background-color: #CD6155;
 }
 
 strong {
