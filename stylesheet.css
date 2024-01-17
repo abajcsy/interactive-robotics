@@ -35,8 +35,8 @@ tr.block {
 }
 
 .label {
-  display: inline;
-    padding: .2em .6em .3em;
+    display: inline;
+    padding: .3em .6em .3em;
     font-size: 75%;
     font-weight: bold;
     line-height: 1;
@@ -66,6 +66,14 @@ tr.block {
 .label-due {
     background-color: #CD6155;
 }
+
+.label-notes {
+    background-color: white;
+    border: 2px solid #8a8a8a;
+    color: #8a8a8a;
+    font-size: 80%;
+}
+
 
 strong {
   /*font-family: 'Libre Baskerville', serif;*/
